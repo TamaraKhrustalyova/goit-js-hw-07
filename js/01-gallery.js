@@ -22,6 +22,46 @@ const makeGalleryItemMarup = galleryItems
     .join('');
 
 galleryRef.insertAdjacentHTML('beforeend', makeGalleryItemMarup);
+galleryRef.addEventListener('click', onClick);
+
+function onClick (event) {
+    event.preventDefault();
+    if (event.target.nodeName !== 'IMG') {
+        return
+    } 
+    if (!event.target.classList.contains('gallery__image')) {
+        return
+    } 
+    const instance = basicLightbox.create(`
+     <img src=${event.target.dataset.source} width="900" height="auto">
+    `,
+    {
+        onShow: (instance) => {
+          window.addEventListener('keydown', onEscKeyPress);
+        },
+        onClose: (instance) => {
+          window.removeEventListener('keydown', onEscKeyPress);
+        },
+      }
+    );
+    instance.show()
+
+    function onEscKeyPress(event) {
+        if (event.code !== 'Escape'){
+            return;
+        } 
+        instance.close();
+      }
+}
+    
+
+
+
+
+
+
+
+
 
 
     
