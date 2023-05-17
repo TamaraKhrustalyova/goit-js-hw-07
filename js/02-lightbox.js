@@ -21,18 +21,9 @@ const makeGalleryItemMarup = galleryItems
     .join('');
 
 galleryRef.insertAdjacentHTML('beforeend', makeGalleryItemMarup);
-galleryRef.addEventListener('click', onClick);
 
-function onClick (event) {
-    event.preventDefault();
-    if (event.target.nodeName !== 'IMG') {
-        return
-    } 
-    if (!event.target.classList.contains('gallery__image')) {
-        return
-    }
     const lightbox = new SimpleLightbox('.gallery a', { 
         captionsData: 'alt', captionPosition: 'bottom', captionDelay: 250
      });
-};
+
 
